@@ -21,6 +21,8 @@ a:hover{text-decoration:underline;}
   <button onclick="login()">Login</button>
   <br><br>
   <button onclick="noPassword()">No password? Request access</button>
+  <br><br>
+  <button onclick="adminLoginPrompt()">I'm the Admin</button>
 </div>
 
 <div id="albumsDiv" style="display:none;">
@@ -68,6 +70,16 @@ function noPassword(){
   if(!name) return;
   db.collection("requests").doc(name).set({approved:false})
     .then(()=>alert(`Thanks for your request! Atef will review it and we will contact you.`));
+}
+
+// Admin login prompt
+function adminLoginPrompt(){
+  const pass = prompt("Enter admin password:");
+  if(pass === "swiftly"){ // كلمة سر الأدمن
+    window.location.href = "admin.html";
+  } else {
+    alert("تحشرش خشومك بكلشي!!"); // رسالة درامية
+  }
 }
 
 // Show albums
