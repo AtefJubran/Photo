@@ -47,8 +47,9 @@ a:hover{ text-decoration:underline;}
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <script>
-// Firebase Config
+// 🔹 Firebase Config
 const firebaseConfig = {
   apiKey: "API_KEY_HERE",
   authDomain: "PROJECT_ID.firebaseapp.com",
@@ -68,6 +69,8 @@ function addUser(){
   db.collection("users").doc(u).set({password:p, approved:true}).then(()=>{
     alert("User added!");
     loadUsers();
+    document.getElementById("newUser").value="";
+    document.getElementById("newPass").value="";
   });
 }
 
@@ -107,7 +110,12 @@ function addDriveLink(){
   const url = document.getElementById("linkUrl").value.trim();
   if(!name || !url){ alert("Enter name & URL"); return;}
   const docId = name.replace(/\s+/g,"_").toLowerCase();
-  db.collection("driveLinks").doc(docId).set({name:name,url:url}).then(()=>{ alert("Link added!"); loadLinks(); });
+  db.collection("driveLinks").doc(docId).set({name:name,url:url}).then(()=>{
+    alert("Link added!");
+    loadLinks();
+    document.getElementById("linkName").value="";
+    document.getElementById("linkUrl").value="";
+  });
 }
 
 // Load Drive links
@@ -136,6 +144,5 @@ function deleteLink(id){
 loadUsers();
 loadLinks();
 </script>
-
 </body>
 </html>
