@@ -94,7 +94,7 @@ function adminLogin(){
   if(pass === adminPassword){
     window.location.href = "admin.html";
   }else{
-    drama.textContent = "💥 Wrong password! Don't mess with me!";
+    drama.textContent = "اطلع/ي برا مين مفكر حالك تحشر خشمك هون؟؟؟؟";
   }
 }
 
@@ -147,11 +147,21 @@ function requestApproval(){
   const user = document.getElementById("regName").value.trim();
   const pass = document.getElementById("regPass").value.trim();
   const msg = document.getElementById("regMsg");
-  if(!user || !pass){ msg.textContent = "Please enter username & password"; return;}
+  if(!user || !pass){ 
+    msg.textContent = "Please enter username & password"; 
+    return;
+  }
+  
   db.collection("users").doc(user).get().then(doc=>{
-    if(doc.exists){ msg.textContent = "User already exists"; return;}
+    if(doc.exists){ 
+      msg.textContent = "User already exists"; 
+      return;
+    }
+    
     db.collection("users").doc(user).set({password:pass, approved:false}).then(()=>{
-      msg.textContent = "Request sent! Wait for admin approval.";
+      msg.textContent = "Thanks for your request! Atef will review it and we will contact you.";
+      document.getElementById("regName").value="";
+      document.getElementById("regPass").value="";
     });
   });
 }
