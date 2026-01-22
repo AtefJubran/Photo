@@ -5,7 +5,7 @@
 <title>Admin Panel</title>
 <style>
 body{font-family:Arial,sans-serif;background:#111;color:white;display:flex;justify-content:center;padding:50px;}
-.container{width:700px;background:rgba(0,0,0,0.85);padding:30px;border-radius:12px;}
+.container{width:800px;background:rgba(0,0,0,0.85);padding:30px;border-radius:12px;}
 input,button{padding:8px;margin:5px;border-radius:6px;border:none;}
 button{background:#ff2d55;color:white;cursor:pointer;}
 table{width:100%;border-collapse:collapse;margin-top:20px;}
@@ -29,6 +29,12 @@ a:hover{text-decoration:underline;}
 <table>
 <tr><th>Username</th><th>Password</th><th>Approved</th><th>Actions</th></tr>
 <tbody id="usersTable"></tbody>
+</table>
+
+<h3>Pending Requests</h3>
+<table>
+<tr><th>Username</th><th>Approved</th><th>Actions</th></tr>
+<tbody id="requestsTable"></tbody>
 </table>
 
 <h3>Add Drive Link</h3>
@@ -62,6 +68,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+// ------------------ Users ------------------
 // Add new user
 function addUser(){
   const u = document.getElementById("newUser").value.trim();
@@ -104,7 +111,41 @@ function deleteUser(id){
   }
 }
 
-// Add Drive link
+// ------------------ Requests ------------------
+// Load pending requests
+function loadRequests(){
+  const table = document.getElementById("requestsTable");
+  table.innerHTML="";
+  db.collection("requests").get().then(snapshot=>{
+    snapshot.forEach(doc=>{
+      const data = doc.data();
+      const tr = document.createElement("tr");
+      tr.innerHTML=`<td>${doc.id}</td><td>${data.approved}</td>
+      <td>
+        <button onclick="approveRequest('${doc.id}')">Approve</button>
+        <button onclick="deleteRequest('${doc.id}')">Delete</button>
+      </td>`;
+      table.appendChild(tr);
+    });
+  });
+}
+
+// Approve request
+function approveRequest(name){
+  db.collection("users").doc(name).set({password:"", approved:true}).then(()=>{
+    db.collection("requests").doc(name).delete().then(()=>loadRequests());
+    loadUsers();
+  });
+}
+
+// Delete request
+function deleteRequest(name){
+  if(confirm("Delete this request?")){
+    db.collection("requests").doc(name).delete().then(()=>loadRequests());
+  }
+}
+
+// ------------------ Drive Links ------------------
 function addDriveLink(){
   const name = document.getElementById("linkName").value.trim();
   const url = document.getElementById("linkUrl").value.trim();
@@ -117,7 +158,6 @@ function addDriveLink(){
   });
 }
 
-// Load Drive links
 function loadLinks(){
   const table = document.getElementById("linksTable");
   table.innerHTML="";
@@ -132,16 +172,17 @@ function loadLinks(){
   });
 }
 
-// Delete Drive link
 function deleteLink(id){
   if(confirm("Delete this link?")){
     db.collection("driveLinks").doc(id).delete().then(()=> loadLinks());
   }
 }
 
-// Initial load
+// ------------------ Initial load ------------------
 loadUsers();
+loadRequests();
 loadLinks();
+
 </script>
 </body>
 </html>
