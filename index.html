@@ -2,58 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Private Gallery</title>
+<title>Private Photo Gallery</title>
 <style>
-body { font-family: Arial, sans-serif; background:#222; color:white; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
-.box { background: rgba(0,0,0,0.8); padding:30px; border-radius:12px; width:360px; text-align:center;}
-input, button { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;}
-button { background:#ff2d55; color:white; font-weight:bold; cursor:pointer;}
-.hidden{ display:none;}
-a{ display:block; color:#00f; margin:5px 0; text-decoration:none;}
-a:hover{ text-decoration:underline;}
-#drama{ color:red; animation:shake 0.5s; }
-@keyframes shake { 0%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}100%{transform:translateX(0);}}
+body{font-family:Arial,sans-serif;background:#111;color:white;text-align:center;padding:50px;}
+input,button{padding:10px;margin:5px;border-radius:6px;border:none;}
+button{background:#ff2d55;color:white;cursor:pointer;}
+a{color:#0af;text-decoration:none;}
+a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
 
-<div class="box" id="choiceBox">
-  <h2>🔐 Choose Login</h2>
-  <button onclick="showLogin()">I'm the Admin</button>
-  <button onclick="showUserLogin()">User</button>
-  <button onclick="showRegister()">No password</button>
+<h2>Welcome to Private Photo Gallery</h2>
+
+<div id="loginDiv">
+  <input type="text" id="username" placeholder="Enter your name">
+  <input type="password" id="password" placeholder="Enter password">
+  <button onclick="login()">Login</button>
+  <br><br>
+  <button onclick="noPassword()">No password? Request access</button>
 </div>
 
-<div class="box hidden" id="adminLoginBox">
-  <h2>🔑 Admin Login</h2>
-  <input type="password" id="adminPass" placeholder="Admin password">
-  <button onclick="adminLogin()">Login</button>
-  <p id="drama"></p>
-  <button onclick="backChoice()">Back</button>
-</div>
-
-<div class="box hidden" id="userLoginBox">
-  <h2>👤 User Login</h2>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="userLogin()">Login</button>
-  <p id="msg"></p>
-  <button onclick="backChoice()">Back</button>
-</div>
-
-<div class="box hidden" id="registerBox">
-  <h2>✍️ Register New Account</h2>
-  <input type="text" id="regName" placeholder="Username">
-  <input type="password" id="regPass" placeholder="Password">
-  <button onclick="requestApproval()">Send request</button>
-  <p id="regMsg"></p>
-  <button onclick="backChoice()">Back</button>
-</div>
-
-<div class="box hidden" id="welcomeBox">
-  <h2 id="welcomeMsg"></h2>
-  <p>📸 Album Links:</p>
-  <div id="driveLinks"></div>
+<div id="albumsDiv" style="display:none;">
+  <h3>Available Albums</h3>
+  <ul id="albumsList"></ul>
   <button onclick="logout()">Logout</button>
 </div>
 
@@ -61,110 +33,65 @@ a:hover{ text-decoration:underline;}
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
-// 🔹 Firebase Config
+// 🔹 Firebase Config الصحيح
 const firebaseConfig = {
-  apiKey: "API_KEY_HERE",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID"
+  apiKey: "AIzaSyDj2taqmuxvbUlLlwCV0DIp-x6FdwLAoE0",
+  authDomain: "privategallery-e307b.firebaseapp.com",
+  projectId: "privategallery-e307b",
+  storageBucket: "privategallery-e307b.firebasestorage.app",
+  messagingSenderId: "1028748741349",
+  appId: "1:1028748741349:web:320660e8bfe36b7d87e20c",
+  measurementId: "G-M5GCFL16Z4"
 };
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Admin password
-const adminPassword = "swiftly";
+let currentUser = null;
 
-// Pages
-function showLogin(){ document.getElementById("choiceBox").classList.add("hidden"); document.getElementById("adminLoginBox").classList.remove("hidden");}
-function showUserLogin(){ document.getElementById("choiceBox").classList.add("hidden"); document.getElementById("userLoginBox").classList.remove("hidden");}
-function showRegister(){ document.getElementById("choiceBox").classList.add("hidden"); document.getElementById("registerBox").classList.remove("hidden");}
-function backChoice(){ 
-  document.getElementById("adminLoginBox").classList.add("hidden"); 
-  document.getElementById("userLoginBox").classList.add("hidden"); 
-  document.getElementById("registerBox").classList.add("hidden");
-  document.getElementById("choiceBox").classList.remove("hidden");
+// Login function
+function login(){
+  const u = document.getElementById("username").value.trim();
+  const p = document.getElementById("password").value.trim();
+  if(!u||!p){alert("Enter username and password");return;}
+  db.collection("users").doc(u).get().then(doc=>{
+    if(doc.exists && doc.data().password===p && doc.data().approved){
+      currentUser = u;
+      showAlbums();
+    } else { alert("Wrong username/password or not approved"); }
+  });
 }
 
-// Admin login
-function adminLogin(){
-  const pass = document.getElementById("adminPass").value;
-  const drama = document.getElementById("drama");
-  if(pass === adminPassword){
-    window.location.href = "admin.html";
-  }else{
-    drama.textContent = "💥 Wrong password! Don't mess with me!";
-  }
+// No password request
+function noPassword(){
+  const name = prompt("Enter your name for request:");
+  if(!name) return;
+  db.collection("requests").doc(name).set({approved:false})
+    .then(()=>alert(`Thanks for your request! Atef will review it and we will contact you.`));
 }
 
-// User login
-function userLogin(){
-  const user = document.getElementById("username").value.trim();
-  const pass = document.getElementById("password").value.trim();
-  const msg = document.getElementById("msg");
-  db.collection("users").doc(user).get().then(doc=>{
-    if(!doc.exists){ msg.textContent = "User not found"; return;}
-    if(doc.data().password === pass){
-      if(doc.data().approved){
-        showWelcome(user);
-      }else{
-        msg.textContent = "Waiting for admin approval";
-      }
-    }else{
-      msg.textContent = "Wrong password";
-    }
-  })
-}
-
-// Show welcome + Drive links
-function showWelcome(user){
-  document.getElementById("userLoginBox").classList.add("hidden");
-  document.getElementById("registerBox").classList.add("hidden");
-  document.getElementById("welcomeBox").classList.remove("hidden");
-  document.getElementById("welcomeMsg").textContent = `Welcome ${user}!`;
-  const container = document.getElementById("driveLinks");
-  container.innerHTML = "";
+// Show albums
+function showAlbums(){
+  document.getElementById("loginDiv").style.display="none";
+  document.getElementById("albumsDiv").style.display="block";
+  const list = document.getElementById("albumsList");
+  list.innerHTML="";
   db.collection("driveLinks").get().then(snapshot=>{
     snapshot.forEach(doc=>{
-      const a = document.createElement("a");
-      a.href = doc.data().url;
-      a.target="_blank";
-      a.textContent = doc.data().name;
-      container.appendChild(a);
+      const li = document.createElement("li");
+      li.innerHTML=`<a href="${doc.data().url}" target="_blank">${doc.data().name}</a>`;
+      list.appendChild(li);
     });
   });
 }
 
 // Logout
 function logout(){
-  document.getElementById("welcomeBox").classList.add("hidden");
-  backChoice();
-}
-
-// Register new user
-function requestApproval(){
-  const user = document.getElementById("regName").value.trim();
-  const pass = document.getElementById("regPass").value.trim();
-  const msg = document.getElementById("regMsg");
-  if(!user || !pass){ 
-    msg.textContent = "Please enter username & password"; 
-    return;
-  }
-  
-  db.collection("users").doc(user).get().then(doc=>{
-    if(doc.exists){ 
-      msg.textContent = "User already exists"; 
-      return;
-    }
-    
-    db.collection("users").doc(user).set({password:pass, approved:false}).then(()=>{
-      msg.textContent = "Thanks for your request! Atef will review it and we will contact you.";
-      document.getElementById("regName").value="";
-      document.getElementById("regPass").value="";
-    });
-  });
+  currentUser = null;
+  document.getElementById("albumsDiv").style.display="none";
+  document.getElementById("loginDiv").style.display="block";
 }
 </script>
+
 </body>
 </html>
