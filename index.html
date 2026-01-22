@@ -2,94 +2,93 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Private Gallery</title>
+<title>Private Site</title>
 <style>
 body {
-  background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#1a1a1a,#3a3a3a);
+  font-family: Arial,sans-serif;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin:0;
 }
 .box {
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   padding: 30px;
   border-radius: 12px;
   width: 320px;
   text-align: center;
 }
 input, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 6px;
-  border: none;
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:6px;
+  border:none;
 }
 button {
-  background: #ff2d55;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
+  background:#ff2d55;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
-.hidden { display: none; }
-a {
-  color: #ffb3c6;
-  display: block;
-  margin: 10px 0;
-  text-decoration: none;
-}
+.hidden { display:none; }
 </style>
 </head>
 
 <body>
 
 <div class="box" id="loginBox">
-  <h2>🔐 Private Access</h2>
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="checkPassword()">Enter</button>
+  <h2>🔐 تسجيل الدخول</h2>
+  <input type="text" id="username" placeholder="اسمك">
+  <input type="password" id="password" placeholder="كلمة السر">
+  <button onclick="login()">دخول</button>
   <p id="msg"></p>
-  <p id="hint" class="hidden">💡 Hint: <b>my favorite artist</b></p>
 </div>
 
-<div class="box hidden" id="gallery">
-  <h2>📸 Photo Gallery</h2>
-  <a href="PUT_DRIVE_LINK_1" target="_blank">📁 Album 1</a>
-  <a href="PUT_DRIVE_LINK_2" target="_blank">📁 Album 2</a>
-
-  <hr style="margin:15px 0">
-  <a href="admin.html">🔑 Admin Area</a>
+<div class="box hidden" id="welcomeBox">
+  <h2 id="welcomeMsg"></h2>
+  <p>📸 معرض الصور:</p>
+  <a href="PUT_DRIVE_LINK_1" target="_blank">Album 1</a>
+  <a href="PUT_DRIVE_LINK_2" target="_blank">Album 2</a>
+  <hr>
+  <a href="admin.html">🔑 صفحة الأدمن</a>
 </div>
 
 <script>
-const hashedPassword =
-"1fd09bcffec8883b638ec16b8deb0bc66bad3c283ae1d4af5cb4484bb5eb2c0f";
+// قاعدة بيانات المستخدمين
+let users = {
+  "Ali":"passAli",
+  "Omar":"passOmar",
+  "Ahmed":"passAhmed"
+};
 
-let attempts = 3;
+// تسجيل الدخول
+function login() {
+  const name = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
 
-async function sha256(text) {
-  const buffer = new TextEncoder().encode(text);
-  const hash = await crypto.subtle.digest("SHA-256", buffer);
-  return Array.from(new Uint8Array(hash))
-    .map(b => b.toString(16).padStart(2, "0"))
-    .join("");
+  if(users[name] && users[name] === pass) {
+    localStorage.setItem("currentUser", name); // حفظ الدخول
+    showWelcome(name);
+  } else {
+    document.getElementById("msg").innerText="❌ اسم أو كلمة السر خاطئة";
+  }
 }
 
-async function checkPassword() {
-  const input = document.getElementById("password").value;
-  const hash = await sha256(input);
+// عرض الترحيب
+function showWelcome(name){
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("welcomeBox").classList.remove("hidden");
+  document.getElementById("welcomeMsg").innerText = "مرحباً يا " + name + " 👋";
+}
 
-  if (hash === hashedPassword) {
-    loginBox.classList.add("hidden");
-    gallery.classList.remove("hidden");
-  } else {
-    attempts--;
-    msg.innerText = "❌ Wrong password";
-    if (attempts === 1) hint.classList.remove("hidden");
-    if (attempts <= 0) document.body.innerHTML =
-      "<h1 style='color:red'>🚫 Access Blocked</h1>";
-  }
+// تحقق إذا المستخدم مسجل من قبل
+window.onload = () => {
+  const user = localStorage.getItem("currentUser");
+  if(user) showWelcome(user);
 }
 </script>
 
