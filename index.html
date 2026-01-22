@@ -1,91 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Secure Access</title>
-  <style>
-    body {
-      background: #0f0f0f;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .box {
-      background: #1c1c1c;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: red;
-      border: none;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Private Gallery</title>
+<style>
+body {
+  background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.box {
+  background: rgba(0,0,0,0.7);
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+}
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+}
+button {
+  background: #ff2d55;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.hidden { display: none; }
+a {
+  color: #ffb3c6;
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+}
+</style>
 </head>
+
 <body>
 
 <div class="box" id="loginBox">
-  <h2>🔐 Secure Login</h2>
-  <input type="password" id="password" placeholder="Enter password">
-  <button onclick="checkPassword()">ENTER</button>
+  <h2>🔐 Private Access</h2>
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="checkPassword()">Enter</button>
   <p id="msg"></p>
+  <p id="hint" class="hidden">💡 Hint: <b>my favorite artist</b></p>
 </div>
 
-<div class="box hidden" id="content">
-  <h2>✅ Access Granted</h2>
-  <p>Welcome. This content is protected.</p>
+<div class="box hidden" id="gallery">
+  <h2>📸 Photo Gallery</h2>
+  <a href="PUT_DRIVE_LINK_1" target="_blank">📁 Album 1</a>
+  <a href="PUT_DRIVE_LINK_2" target="_blank">📁 Album 2</a>
+
+  <hr style="margin:15px 0">
+  <a href="admin.html">🔑 Admin Area</a>
 </div>
 
 <script>
-  const hashedPassword = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
-  let attempts = 3;
+const hashedPassword =
+"1fd09bcffec8883b638ec16b8deb0bc66bad3c283ae1d4af5cb4484bb5eb2c0f";
 
-  async function sha256(text) {
-    const buffer = new TextEncoder().encode(text);
-    const hash = await crypto.subtle.digest("SHA-256", buffer);
-    return Array.from(new Uint8Array(hash))
-      .map(b => b.toString(16).padStart(2, "0"))
-      .join("");
+let attempts = 3;
+
+async function sha256(text) {
+  const buffer = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest("SHA-256", buffer);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function checkPassword() {
+  const input = document.getElementById("password").value;
+  const hash = await sha256(input);
+
+  if (hash === hashedPassword) {
+    loginBox.classList.add("hidden");
+    gallery.classList.remove("hidden");
+  } else {
+    attempts--;
+    msg.innerText = "❌ Wrong password";
+    if (attempts === 1) hint.classList.remove("hidden");
+    if (attempts <= 0) document.body.innerHTML =
+      "<h1 style='color:red'>🚫 Access Blocked</h1>";
   }
-
-  async function checkPassword() {
-    if (attempts <= 0) {
-      document.body.innerHTML = "<h1 style='color:red'>🚫 ACCESS BLOCKED</h1>";
-      return;
-    }
-
-    const input = document.getElementById("password").value;
-    const hash = await sha256(input);
-
-    if (hash === hashedPassword) {
-      document.getElementById("loginBox").classList.add("hidden");
-      document.getElementById("content").classList.remove("hidden");
-    } else {
-      attempts--;
-      document.getElementById("msg").innerText =
-        "❌ Wrong password. Attempts left: " + attempts;
-    }
-  }
+}
 </script>
 
 </body>
