@@ -4,16 +4,15 @@
 <meta charset="UTF-8">
 <title>Admin Panel</title>
 <style>
-body { font-family: Arial, sans-serif; background:#111; color:white; display:flex; justify-content:center; align-items:flex-start; padding:50px 0; margin:0;}
-.container { width:700px; background:rgba(0,0,0,0.85); padding:30px; border-radius:12px;}
-h2{ text-align:center; margin-bottom:20px;}
-input, button { padding:8px; margin:5px; border-radius:6px; border:none;}
-button { background:#ff2d55; color:white; font-weight:bold; cursor:pointer;}
-table { width:100%; border-collapse:collapse; margin-top:20px;}
-th, td { padding:8px; border:1px solid #444; text-align:center;}
+body{font-family:Arial,sans-serif;background:#111;color:white;display:flex;justify-content:center;padding:50px;}
+.container{width:700px;background:rgba(0,0,0,0.85);padding:30px;border-radius:12px;}
+input,button{padding:8px;margin:5px;border-radius:6px;border:none;}
+button{background:#ff2d55;color:white;cursor:pointer;}
+table{width:100%;border-collapse:collapse;margin-top:20px;}
+th,td{padding:8px;border:1px solid #444;text-align:center;}
 tr:nth-child(even){background:#222;}
-a{ color:#00f; text-decoration:none;}
-a:hover{ text-decoration:underline;}
+a{color:#0af;text-decoration:none;}
+a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -49,15 +48,17 @@ a:hover{ text-decoration:underline;}
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
-// 🔹 Firebase Config
+// 🔹 Firebase Config الصحيح
 const firebaseConfig = {
-  apiKey: "API_KEY_HERE",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID"
+  apiKey: "AIzaSyDj2taqmuxvbUlLlwCV0DIp-x6FdwLAoE0",
+  authDomain: "privategallery-e307b.firebaseapp.com",
+  projectId: "privategallery-e307b",
+  storageBucket: "privategallery-e307b.firebasestorage.app",
+  messagingSenderId: "1028748741349",
+  appId: "1:1028748741349:web:320660e8bfe36b7d87e20c",
+  measurementId: "G-M5GCFL16Z4"
 };
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -65,9 +66,8 @@ const db = firebase.firestore();
 function addUser(){
   const u = document.getElementById("newUser").value.trim();
   const p = document.getElementById("newPass").value.trim();
-  if(!u || !p){ alert("Enter username & password"); return;}
+  if(!u||!p){alert("Enter username & password");return;}
   db.collection("users").doc(u).set({password:p, approved:true}).then(()=>{
-    alert("User added!");
     loadUsers();
     document.getElementById("newUser").value="";
     document.getElementById("newPass").value="";
@@ -108,10 +108,9 @@ function deleteUser(id){
 function addDriveLink(){
   const name = document.getElementById("linkName").value.trim();
   const url = document.getElementById("linkUrl").value.trim();
-  if(!name || !url){ alert("Enter name & URL"); return;}
+  if(!name||!url){alert("Enter name & URL");return;}
   const docId = name.replace(/\s+/g,"_").toLowerCase();
   db.collection("driveLinks").doc(docId).set({name:name,url:url}).then(()=>{
-    alert("Link added!");
     loadLinks();
     document.getElementById("linkName").value="";
     document.getElementById("linkUrl").value="";
