@@ -135,10 +135,17 @@ function loadRequests(){
 }
 
 // Approve request
-function approveRequest(name){
-  db.collection("users").doc(name).set({password:"", approved:true}).then(()=>{
-    db.collection("requests").doc(name).delete().then(()=>loadRequests());
-    loadUsers();
+// Approve request
+function approveRequest(name, email){
+  db.collection("users").doc(name).set({
+    password:"", 
+    approved:true,
+    email: email
+  }).then(()=>{
+    db.collection("requests").doc(name).delete().then(()=>{
+      loadRequests();
+      loadUsers();
+    });
   });
 }
 
