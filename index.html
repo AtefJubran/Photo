@@ -1,113 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Private Photo Gallery</title>
-<style>
-body{font-family:Arial,sans-serif;background:#111;color:white;text-align:center;padding:50px;}
-input,button{padding:10px;margin:5px;border-radius:6px;border:none;}
-button{background:#ff2d55;color:white;cursor:pointer;}
-a{color:#0af;text-decoration:none;}
-a:hover{text-decoration:underline;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRANMUN | Annual Model United Nations Conference</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.25rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Committees Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-<h2>Welcome to Atef's Private Photo Gallery</h2>
+    <header>
+        <div class="logo">FRAN<span>MUN</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#committees">Committees</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div id="loginDiv">
-  <input type="text" id="username" placeholder="Enter your name">
-  <input type="password" id="password" placeholder="Enter password">
-  <button onclick="login()">Login</button>
-  <br><br>
-  <button onclick="noPassword()">No password? Request access</button>
-  <br><br>
-  <button onclick="adminLoginPrompt()">I'm the Admin</button>
-</div>
+    <section class="hero">
+        <h1>Shape Global Diplomacy at FRANMUN</h1>
+        <p>Join brilliant delegates from around the world to debate, negotiate, and draft resolutions for tomorrow’s challenges.</p>
+        <div class="cta-group">
+            <a href="#register" class="btn btn-primary">Register Now</a>
+            <a href="#committees" class="btn btn-secondary">Explore Committees</a>
+        </div>
+    </section>
 
-<div id="albumsDiv" style="display:none;">
-  <h3>Available Albums</h3>
-  <ul id="albumsList"></ul>
-  <button onclick="logout()">Logout</button>
-</div>
+    <section id="committees">
+        <h2>Featured Committees</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>UN General Assembly (UNGA)</h3>
+                <p>Focusing on sustainable development, international cooperation, and global economic frameworks.</p>
+            </div>
+            <div class="card">
+                <h3>Security Council (UNSC)</h3>
+                <p>Addressing high-stakes geopolitical crises, security protocols, and diplomatic intervention.</p>
+            </div>
+            <div class="card">
+                <h3>Historical Crisis Committee</h3>
+                <p>Navigating complex historical pivot points with fast-paced directives and real-time updates.</p>
+            </div>
+        </div>
+    </section>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<script>
-// 🔹 Firebase Config الصحيح
-const firebaseConfig = {
-  apiKey: "AIzaSyDj2taqmuxvbUlLlwCV0DIp-x6FdwLAoE0",
-  authDomain: "privategallery-e307b.firebaseapp.com",
-  projectId: "privategallery-e307b",
-  storageBucket: "privategallery-e307b.firebasestorage.app",
-  messagingSenderId: "1028748741349",
-  appId: "1:1028748741349:web:320660e8bfe36b7d87e20c",
-  measurementId: "G-M5GCFL16Z4"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-let currentUser = null;
-
-// Login function
-function login(){
-  const u = document.getElementById("username").value.trim();
-  const p = document.getElementById("password").value.trim();
-  if(!u||!p){alert("Enter username and password");return;}
-  db.collection("users").doc(u).get().then(doc=>{
-    if(doc.exists && doc.data().password===p && doc.data().approved){
-      currentUser = u;
-      showAlbums();
-    } else { alert("Wrong username/password or not approved"); }
-  });
-}
-
-// No password request
-function noPassword(){
-  const name = prompt("Enter your name for request:");
-  const email = prompt("Enter your email (so we can contact you):");
-  if(!name || !email) return; // إذا لم يكتب شيء، لا ينفذ
-  db.collection("requests").doc(name).set({
-    approved: false,
-    email: email
-  }).then(()=>{
-    alert(`Thanks for your request! Atef will review it and we will contact you.`);
-  });
-}
-// Admin login prompt
-function adminLoginPrompt(){
-  const pass = prompt("Enter admin password:");
-  if(pass === "swiftly"){ // كلمة سر الأدمن
-    window.location.href = "admin.html";
-  } else {
-    alert("تحشرش خشومك بكلشي!!"); // رسالة درامية
-  }
-}
-
-// Show albums
-function showAlbums(){
-  document.getElementById("loginDiv").style.display="none";
-  document.getElementById("albumsDiv").style.display="block";
-  const list = document.getElementById("albumsList");
-  list.innerHTML="";
-  db.collection("driveLinks").get().then(snapshot=>{
-    snapshot.forEach(doc=>{
-      const li = document.createElement("li");
-      li.innerHTML=`<a href="${doc.data().url}" target="_blank">${doc.data().name}</a>`;
-      list.appendChild(li);
-    });
-  });
-}
-
-// Logout
-function logout(){
-  currentUser = null;
-  document.getElementById("albumsDiv").style.display="none";
-  document.getElementById("loginDiv").style.display="block";
-}
-</script>
+    <footer>
+        <p>&copy; 2026 FRANMUN Conference. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
