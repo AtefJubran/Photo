@@ -1,232 +1,1069 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRANMUN | Annual Model United Nations Conference</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent: #10b981;
-            --accent-hover: #059669;
-            --border-color: #334155;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+  <title>FRANMUN 2026 | Official Franciscan School Model United Nations Conference</title>
+  
+  <meta name="description" content="Welcome to the official homepage of FRANMUN 2026, the inaugural Model United Nations conference hosted by Franciscan Sister's School, Nazareth. Join elite student diplomats in crafting resolutions for global geopolitical issues." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://franmun.org/" />
+  <meta name="theme-color" content="#0d1117" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+  <link rel="icon" type="image/png" href="7d8c75e2-c20b-4770-aa29-71ab72b07f58-dnscaled.png">
+  <link rel="apple-touch-icon" href="7d8c75e2-c20b-4770-aa29-71ab72b07f58-dnscaled.png" />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FRANMUN 2026 | Franciscan School Model United Nations" />
+  <meta property="og:description" content="Engage in advanced diplomatic discourse at the First Annual Franciscan School Model United Nations Conference. Register today as a delegate or chair." />
+  <meta property="og:url" content="https://franmun.org/" />
+  <meta property="og:site_name" content="FRANMUN" />
+  <meta property="og:image" content="logo.jpeg.JPG" />
+  <meta property="og:image:alt" content="FRANMUN Official Insignia Logo" />
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FRANMUN 2026 | Franciscan School Model United Nations" />
+  <meta name="twitter:description" content="Engage in advanced diplomatic discourse at the First Annual Franciscan School Model United Nations Conference. Register today as a delegate or chair." />
+  <meta name="twitter:image" content="logo.jpeg.JPG" />
 
-        /* Navigation */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(15, 23, 42, 0.9);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://franmun.org/#organization",
+        "name": "Franciscan Sister's School Nazareth",
+        "url": "https://franmun.org/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://franmun.org/logo.jpeg.JPG",
+          "caption": "Franciscan Sister's School Logo"
+        },
+        "email": "franmun2025@gmail.com",
+        "sameAs": [
+          "https://www.instagram.com/franciscan_munners"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://franmun.org/#website",
+        "url": "https://franmun.org/",
+        "name": "FRANMUN 2026",
+        "description": "First Annual Model United Nations Conference at Franciscan Sister's School Nazareth",
+        "publisher": {
+          "@id": "https://franmun.org/#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://franmun.org/?s={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
         }
+      }
+    ]
+  }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: var(--text-primary);
-        }
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-        .logo span {
-            color: var(--accent);
-        }
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-gradient-start: #111827;
+      --bg-gradient-end: #030712;
+      
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-hover-bg: rgba(31, 41, 55, 0.85);
+      
+      --accent-gold: #fbbf24;
+      --accent-gold-glow: rgba(251, 191, 36, 0.15);
+      --accent-blue: #38bdf8;
+      --accent-blue-hover: #0ea5e9;
+      --accent-red: #f87171;
+      
+      --text-dark: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-body: #d1d5db;
+      
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      --radius-button: 10px;
+      --radius-card: 16px;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+      --shadow-hover: 0 25px 50px -12px rgba(56, 189, 248, 0.15);
+    }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      min-height: 100%;
+      background: var(--bg-main);
+      scroll-behavior: smooth;
+    }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+    body {
+      font-family: var(--font-body);
+      background: radial-gradient(circle at top center, var(--bg-gradient-start) 0%, var(--bg-main) 60%, var(--bg-gradient-end) 100%);
+      min-height: 100vh;
+      color: var(--text-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        nav a:hover {
-            color: var(--accent);
-        }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
 
-        /* Hero Section */
-        .hero {
-            padding: 8rem 5% 6rem;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+    header.nav-hidden {
+      transform: translateY(-100%);
+    }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
-        }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-        }
+    header img {
+      max-width: 48px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      background: #fff;
+      padding: 2px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
 
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
+    .header-text h1 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: 0.04em;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
+    .header-text p {
+      font-size: 10px;
+      color: var(--accent-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
 
-        .btn-primary {
-            background-color: var(--accent);
-            color: white;
-        }
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-        }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      min-height: 38px;
+      touch-action: manipulation;
+    }
 
-        .btn-secondary {
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
+    .tab-btn:hover {
+      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.05);
+    }
 
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+    .tab-btn.active {
+      color: #0b0f19;
+      background: var(--accent-gold);
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+    }
 
-        /* Sections */
-        section {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 130px 20px 70px 20px;
+      min-height: 85vh;
+    }
 
-        section h2 {
-            font-size: 2.25rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
+    .hero-section { 
+      padding: 40px 0 20px 0;
+      text-align: center;
+    }
 
-        /* Committees Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+    .hero-section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      text-shadow: 0 4px 30px rgba(251, 191, 36, 0.15);
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: transform 0.2s, border-color 0.2s;
-        }
+    .hero-section p {
+      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent-gold);
+      font-weight: 700;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
 
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-        }
+    .official-section {
+      margin: 40px 0;
+      text-align: center;
+      background: var(--card-bg);
+      padding: 40px 30px;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-premium);
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
 
-        .card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
+    .official-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue));
+    }
 
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
+    .official-section h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 18px;
+    }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 5%;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
+    .official-section p {
+      color: var(--text-body);
+      font-size: 15.5px;
+      line-height: 1.8;
+      max-width: 780px;
+      margin: 0 auto;
+    }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav ul { display: none; }
-        }
-    </style>
+    .divider-line {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.4), transparent);
+      margin: 45px auto;
+    }
+
+    .countdown-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .countdown-box {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 22px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: var(--transition-smooth);
+    }
+
+    .countdown-box:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--accent-gold);
+      box-shadow: 0 12px 25px rgba(251, 191, 36, 0.1);
+    }
+
+    .countdown-number {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 700;
+      display: block;
+      color: var(--accent-gold);
+    }
+
+    .countdown-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    .committee-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .committee-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .committee-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .committee-icon {
+      aspect-ratio: 1 / 1; 
+      cursor: pointer;
+      background: var(--card-bg);
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      overflow: hidden;
+      width: 100%;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-premium);
+      touch-action: manipulation;
+    }
+
+    .committee-icon:hover {
+      background: var(--card-hover-bg);
+      transform: translateY(-6px);
+      border-color: var(--accent-gold);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .committee-icon img {
+      max-width: 75%;
+      max-height: 75%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.4));
+    }
+
+    .profiles-grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 24px;
+      justify-content: center;
+      justify-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .profiles-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .profiles-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .profiles-grid-container.center-few {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+    }
+    .profiles-grid-container.center-few > .profile-card-item {
+      width: 100%;
+      max-width: 320px;
+    }
+    @media (min-width: 768px) {
+      .profiles-grid-container.center-few > .profile-card-item {
+        width: calc(50% - 12px);
+      }
+    }
+
+    .profile-card-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: var(--card-bg);
+      padding: 26px;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-premium);
+      transition: var(--transition-smooth);
+      width: 100%;
+    }
+
+    .profile-card-item:hover {
+      background: var(--card-hover-bg);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .profile-square-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 190px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-name {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .profile-role {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+    }
+
+    .profile-bio {
+      color: var(--text-body);
+      font-size: 13.5px;
+      line-height: 1.65;
+      width: 100%;
+      text-align: center;
+    }
+
+    .committee-page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .back-btn {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-dark);
+      padding: 10px 18px;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: var(--transition-smooth);
+      min-height: 42px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      touch-action: manipulation;
+    }
+
+    .back-btn:hover {
+      background: var(--accent-gold);
+      color: #0b0f19;
+      border-color: var(--accent-gold);
+      box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+    }
+
+    .parent-notice-section {
+      background: var(--card-bg);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      margin: 35px auto;
+      max-width: 780px;
+      text-align: center;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .parent-notice-text {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    .parent-notice-text strong {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .button-container {
+      margin: 30px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .button-container {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-gold);
+      color: #0b0f19;
+      font-weight: 700;
+      padding: 15px 28px;
+      border-radius: var(--radius-button);
+      text-decoration: none;
+      font-size: 12.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      width: 100%;
+      max-width: 290px;
+      min-height: 48px;
+      box-shadow: 0 8px 22px rgba(251, 191, 36, 0.25);
+      transition: var(--transition-smooth);
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .button:hover {
+      background: #fcd34d;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(251, 191, 36, 0.4);
+    }
+
+    .modal-secret-stamp {
+      border: 2px dashed var(--accent-red);
+      color: var(--accent-red);
+      padding: 10px 20px;
+      border-radius: 6px;
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 2.5px;
+      transform: rotate(-1.5deg);
+      margin: 18px 0;
+      background: rgba(248, 113, 113, 0.05);
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 16px;
+        flex-direction: column; 
+        gap: 12px;
+      }
+      .logo-container {
+        width: 100%;
+        justify-content: center;
+      }
+      .nav-tabs {
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+      }
+      .tab-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+      .countdown-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .main-container {
+        padding-top: 160px;
+      }
+    }
+
+    .page-view { display: none; }
+    .page-view.active-page { display: block; }
+  </style>
 </head>
 <body>
 
+  <div id="maintenanceContent" style="display:none;">
+    <div style="text-align:center; padding:80px 20px;">
+      <h2 style="font-family: var(--font-heading); margin-bottom: 16px; font-size: 2rem; color: #fff;">System Maintenance</h2>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">The FRANMUN administrative portal is currently undergoing scheduled updates.</p>
+      <a href="https://www.instagram.com/franciscan_munners" target="_blank" rel="noopener" style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">@franciscan_munners</a>
+    </div>
+  </div>
+
+  <div id="delegateContent">
     <header>
-        <div class="logo">FRAN<span>MUN</span></div>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#committees">Committees</a></li>
-                <li><a href="#schedule">Schedule</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+      <div class="logo-container">
+        <img src="logo.jpeg.JPG" alt="Franciscan Sister's School Official Logo">
+        <div class="header-text">
+          <h1>Franciscan School</h1>
+          <p>FRANMUN 2026</p>
+        </div>
+      </div>
+
+      <nav class="nav-tabs" id="navTabs">
+        <button class="tab-btn active" id="btn-home" onclick="switchPage('home')">Home</button>
+        <button class="tab-btn" id="btn-committees" onclick="switchPage('committees')">Committees</button>
+        <button class="tab-btn" id="btn-team" onclick="switchPage('team')">Team</button>
+        <button class="tab-btn" id="btn-gallery" onclick="switchPage('gallery')">Gallery</button>
+      </nav>
     </header>
 
-    <section class="hero">
-        <h1>Shape Global Diplomacy at FRANMUN</h1>
-        <p>Join brilliant delegates from around the world to debate, negotiate, and draft resolutions for tomorrow’s challenges.</p>
-        <div class="cta-group">
-            <a href="#register" class="btn btn-primary">Register Now</a>
-            <a href="#committees" class="btn btn-secondary">Explore Committees</a>
+    <main class="main-container">
+      
+      <!-- HOME PAGE -->
+      <section id="page-home" class="page-view active-page">
+        <div class="hero-section">
+          <h2>FRANMUN</h2>
+          <p>First Annual Model United Nations Conference</p>
         </div>
-    </section>
 
-    <section id="committees">
-        <h2>Featured Committees</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>UN General Assembly (UNGA)</h3>
-                <p>Focusing on sustainable development, international cooperation, and global economic frameworks.</p>
-            </div>
-            <div class="card">
-                <h3>Security Council (UNSC)</h3>
-                <p>Addressing high-stakes geopolitical crises, security protocols, and diplomatic intervention.</p>
-            </div>
-            <div class="card">
-                <h3>Historical Crisis Committee</h3>
-                <p>Navigating complex historical pivot points with fast-paced directives and real-time updates.</p>
-            </div>
+        <div class="official-section">
+          <h3>Conference Countdown</h3>
+          <div class="countdown-container">
+            <div class="countdown-box"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+            <div class="countdown-box"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hours</span></div>
+            <div class="countdown-box"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
+            <div class="countdown-box"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
+          </div>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 FRANMUN Conference. All rights reserved.</p>
-    </footer>
+        <div class="parent-notice-section">
+          <div class="parent-notice-text">
+            <strong>Official Registration Notice:</strong> Parents or legal guardians must review and sign the required participation documentation. The guardian's name serves as official digital authorization.
+          </div>
+        </div>
 
+        <div class="button-container" id="liveRegButtons"></div>
+
+        <div class="divider-line"></div>
+
+        <div class="official-section">
+          <h3>About Our Conference</h3>
+          <p>Welcome to Franciscan Sister's School's inaugural Model United Nations conference. Join us for a premier academic event where student delegates engage in rigorous diplomatic discourse, analyze complex geopolitical issues, and draft high-impact resolutions.</p>
+        </div>
+      </section>
+
+      <!-- COMMITTEES LIST PAGE -->
+      <section id="page-committees" class="page-view">
+        <div class="official-section" style="margin-top: 0;">
+          <h3>Conference Committees</h3>
+          <p style="margin-bottom: 28px;">Select a committee below to review official agendas, study guides, and chair profiles.</p>
+          <div class="committee-grid">
+            <div class="committee-icon" onclick="openCommitteePage('UNICEF')"><img src="unicef.png" alt="UNICEF" /></div>
+            <div class="committee-icon" onclick="openCommitteePage('UNWOMEN')"><img src="unwomen.png" alt="UN Women" /></div>
+            <div class="committee-icon" onclick="openCommitteePage('UNHRC')"><img src="unhrc.png" alt="UNHRC" /></div>
+            <div class="committee-icon" onclick="openCommitteePage('DISEC')"><img src="disec.png" alt="DISEC" /></div>
+            <div class="committee-icon" onclick="openCommitteePage('WHO')"><img src="who.png" alt="WHO" id="whoImage" onerror="this.src='who.png'" /></div>
+            <div class="committee-icon" onclick="openCommitteePage('UNHSC')"><img src="unhsc.png" alt="UNHSC" /></div>
+            <div class="committee-icon" onclick="openCommitteePage('CRISIS')"><img src="crisis.png" alt="CRISIS" /></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INDIVIDUAL COMMITTEE SUB-PAGE -->
+      <section id="page-committee-detail" class="page-view">
+        <div class="committee-page-header">
+          <button class="back-btn" onclick="switchPage('committees')">&larr; Return to Committees</button>
+        </div>
+
+        <div class="official-section" style="text-align: center; margin-bottom: 24px;">
+          <h2 id="detailCommitteeTitle" style="font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: #fff; letter-spacing: 0.05em; margin-bottom: 20px;">Committee Name</h2>
+          
+          <div style="font-size: 12px; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;">Research Report &amp; Topics</div>
+          
+          <div style="padding: 10px 0;">
+            <p id="detailTopicsText" style="color: var(--text-dark); font-size: 15.5px; font-weight: 600; line-height: 1.7; white-space: pre-line; max-width: 800px; margin: 0 auto;"></p>
+          </div>
+
+          <div id="detailComingSoonStamp" style="display: none; text-align: center; padding: 20px 0;">
+            <div class="modal-secret-stamp">RESTRICTED</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Committee agendas and confidential briefs are pending release.</p>
+          </div>
+
+          <div style="margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px;">
+            <a id="detailReportLink" href="#" target="_blank" class="button" style="max-width: 290px;" rel="noopener">Access Full Research Report &rarr;</a>
+            <div id="countryMatrixDetailContainer" style="width: 100%; display: flex; justify-content: center;"></div>
+          </div>
+        </div>
+
+        <div class="divider-line"></div>
+
+        <div class="official-section">
+          <h3 id="chairSectionHeading">Chairs</h3>
+          <div class="profiles-grid-container" id="detailChairsContainer">
+          </div>
+        </div>
+      </section>
+
+      <!-- DEDICATED TEAM PAGE -->
+      <section id="page-team" class="page-view">
+        <div class="hero-section" style="padding-top: 10px;">
+          <h2>Secretariat Team</h2>
+          <p>Executive Leadership of FRANMUN 2026</p>
+        </div>
+        <div id="teamPageContainer" class="profiles-grid-container" style="margin-top: 30px;">
+          <div style="grid-column: 1 / -1;"><div class="spinner"></div></div>
+        </div>
+      </section>
+
+      <!-- GALLERY PAGE -->
+      <section id="page-gallery" class="page-view">
+        <div class="official-section" id="galleryCardContent" style="padding: 40px 24px;">
+          <div class="spinner"></div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <footer style="
+    text-align: center; 
+    padding: 40px 20px; 
+    margin-top: 60px; 
+    border-top: 1px solid rgba(255, 255, 255, 0.08); 
+    background: rgba(11, 15, 25, 0.95);
+    backdrop-filter: blur(12px);
+  ">
+    <p style="font-size: 13.5px; color: var(--text-body); margin: 0 0 6px 0;">
+      Official Inquiry: <a href="mailto:franmun2025@gmail.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">franmun2025@gmail.com</a>
+    </p>
+    <p style="font-size: 13.5px; color: #fff; font-weight: 700; margin: 0 0 12px 0;">
+      Franciscan Sister's School Nazareth
+    </p>
+    <p style="font-size: 11.5px; color: var(--text-muted); opacity: 0.9; margin: 0;">
+      &copy; 2026 Franciscan Sister's School MUN. All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    let lastScrollY = window.scrollY;
+    let lastKnownScrollY = window.scrollY;
+    let ticking = false;
+    const globalHeader = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollDelta = lastScrollY - lastKnownScrollY;
+          if (Math.abs(scrollDelta) > 15) {
+            if (lastScrollY > 120 && scrollDelta > 0) {
+              globalHeader.classList.add('nav-hidden');
+            } else if (scrollDelta < 0) {
+              globalHeader.classList.remove('nav-hidden');
+            }
+            lastKnownScrollY = lastScrollY;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) targetPage.classList.add('active-page');
+      
+      const btn = document.getElementById('btn-' + pageId);
+      if (btn) btn.classList.add('active');
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTMBi7k8XzwrNk5MERo7LXtApvhAid08E",
+      authDomain: "franmun-f5498.firebaseapp.com",
+      databaseURL: "https://franmun-f5498-default-rtdb.firebaseio.com",
+      projectId: "franmun-f5498",
+      storageBucket: "franmun-f5498.firebasestorage.app",
+      messagingSenderId: "574017816071",
+      appId: "1:574017816071:web:1968d9a793dec6a6cacca2",
+      measurementId: "G-WRXCD54P71"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    let appData = {};
+
+    database.ref("homepage_data").on("value", (snapshot) => {
+      if (snapshot.exists()) {
+        appData = snapshot.val() || {};
+        
+        const maintenanceOverlay = document.getElementById("maintenanceContent");
+        if (appData.maintenanceMode) {
+          maintenanceOverlay.style.display = "block";
+          document.getElementById("delegateContent").style.display = "none";
+          return; 
+        } else {
+          maintenanceOverlay.style.display = "none";
+          document.getElementById("delegateContent").style.display = "block";
+        }
+        
+        renderRegistrationButtons();
+        renderTeamPage();
+        renderGallerySection();
+      }
+    });
+
+    function renderTeamPage() {
+      const container = document.getElementById("teamPageContainer");
+      if (!container) return;
+
+      container.className = "profiles-grid-container";
+      if (!appData.sgTeam || !Array.isArray(appData.sgTeam) || appData.sgTeam.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center;"><p style="color: var(--text-muted);">Secretariat members pending announcement.</p></div>`;
+        return;
+      }
+
+      let html = "";
+      appData.sgTeam.forEach((member) => {
+        html += `
+          <div class="profile-card-item">
+            <img src="${member.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${member.name || 'Team Member'}" onerror="this.src='logo.jpeg.JPG'">
+            <div class="profile-name">${member.name || ''}</div>
+            <div class="profile-role">${member.role || 'Secretariat General'}</div>
+            <div class="profile-bio">${member.bio || 'Biography pending release.'}</div>
+          </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function renderGallerySection() {
+      const container = document.getElementById("galleryCardContent");
+      if (!container) return;
+
+      if (appData.galleryLocked) {
+        container.innerHTML = `
+          <h3>Conference Gallery Restricted</h3>
+          <p style="color: var(--text-muted); max-width: 500px; margin: 16px auto 0 auto;">
+            Official photographic archives and media streams will be published following conference proceedings.
+          </p>`;
+      } else {
+        let filesHtml = `<h3>Official Conference Archives</h3>
+                         <p style="color: var(--text-muted); margin-bottom: 24px;">Access official documentation and photographic drives below:</p>
+                         <div style="display: flex; flex-direction: column; gap: 14px; max-width: 320px; margin: 0 auto; width: 100%;">`;
+        
+        if (appData.driveFiles && Array.isArray(appData.driveFiles) && appData.driveFiles.length > 0) {
+          appData.driveFiles.forEach(fileObj => {
+            filesHtml += `<a href="${fileObj.link || '#'}" target="_blank" rel="noopener noreferrer" class="button" style="max-width: 100%;">${fileObj.title || 'View Archive Document'} &rarr;</a>`;
+          });
+        } else {
+          filesHtml += `<p style="color: var(--text-muted); font-size: 13.5px;">No files published yet.</p>`;
+        }
+        filesHtml += `</div>`;
+        container.innerHTML = filesHtml;
+      }
+    }
+
+    function renderRegistrationButtons() {
+      const container = document.getElementById("liveRegButtons");
+      if(!container) return;
+      let html = "";
+      if (appData.delegatesOpen) {
+        html += `<a href="https://docs.google.com/forms/d/1sOFqQOVIdU6Z--wURon5p6E5cgn-sLTFOjrpWvCkZqk/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" class="button">Delegate Registration &rarr;</a>`;
+      } else {
+        html += `<a href="#" class="button" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text-muted); cursor:not-allowed;" onclick="event.preventDefault();">Delegate Registration Closed</a>`;
+      }
+      if (appData.chairsOpen) {
+        html += `<a href="https://docs.google.com/forms/d/e/1FAIpQLSf0NSNzbcxGG2MXZtzw4hbb-BkSPUjqtC8l7lJwOYDv9fg/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="button">Chair Registration &rarr;</a>`;
+      } else {
+        html += `<a href="#" class="button" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text-muted); cursor:not-allowed;" onclick="event.preventDefault();">Chair Registration Closed</a>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function openCommitteePage(committeeName) {
+      document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
+      document.getElementById('page-committee-detail').classList.add('active-page');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      document.getElementById("detailCommitteeTitle").innerText = committeeName;
+
+      const topicsText = document.getElementById("detailTopicsText");
+      const stampContainer = document.getElementById("detailComingSoonStamp");
+      const reportLink = document.getElementById("detailReportLink");
+      const matrixDetailContainer = document.getElementById("countryMatrixDetailContainer");
+      const chairsContainer = document.getElementById("detailChairsContainer");
+      const chairHeading = document.getElementById("chairSectionHeading");
+
+      chairsContainer.innerHTML = `<div style="grid-column: 1 / -1;"><div class="spinner"></div></div>`;
+
+      const matrixUrl = appData.countryMatrixPdf || "";
+      const isMatrixLocked = !!appData.countryMatrixLocked;
+      if (!isMatrixLocked && matrixUrl !== "") {
+        matrixDetailContainer.innerHTML = `<a href="${matrixUrl}" target="_blank" rel="noopener noreferrer" class="button" style="max-width: 290px;">Country Matrix &rarr;</a>`;
+      } else {
+        matrixDetailContainer.innerHTML = `<a href="#" class="button" style="max-width: 290px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); cursor: not-allowed;" onclick="event.preventDefault();">Country Matrix Pending</a>`;
+      }
+
+      if (appData && appData.committees && appData.committees[committeeName]) {
+        const data = appData.committees[committeeName];
+        reportLink.href = data.report || "#";
+
+        if (appData.committeesComingSoon === true) {
+          topicsText.style.display = "none";
+          stampContainer.style.display = "block";
+          chairsContainer.className = "profiles-grid-container";
+          chairsContainer.innerHTML = "";
+          return;
+        }
+
+        topicsText.style.display = "block";
+        stampContainer.style.display = "none";
+        topicsText.innerText = data.topics || "Agenda details pending...";
+
+        if (committeeName === "CRISIS") {
+          chairHeading.innerText = "Chairs";
+          chairsContainer.className = "profiles-grid-container center-few";
+          let html = "";
+          
+          html += `<div style="grid-column: 1 / -1; width: 100%; font-family: var(--font-heading); font-weight: 700; color: var(--accent-gold); text-transform: uppercase; font-size: 16px; letter-spacing: 0.15em; margin-bottom: 8px; text-align: center;">Front Room Chair</div>`;
+          if (data.chairs && Array.isArray(data.chairs) && data.chairs.length > 0) {
+            data.chairs.forEach(chair => {
+              html += `
+                <div class="profile-card-item">
+                  <img src="${chair.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${chair.name || 'Chair'}" onerror="this.src='logo.jpeg.JPG'">
+                  <div class="profile-name">${chair.name || 'Chair'}</div>
+                  <div class="profile-role">Front Room Chair</div>
+                  <div class="profile-bio">${chair.bio || 'Biography pending release.'}</div>
+                </div>`;
+            });
+          } else {
+            html += `<p style="font-size:13.5px; color:var(--text-muted); width: 100%; text-align: center;">Front room leadership pending.</p>`;
+          }
+
+          html += `<div style="grid-column: 1 / -1; width: 100%; font-family: var(--font-heading); font-weight: 700; color: var(--accent-gold); text-transform: uppercase; font-size: 16px; letter-spacing: 0.15em; margin-top: 30px; margin-bottom: 8px; text-align: center;">Backroom Chairs</div>`;
+          if (data.backroom && Array.isArray(data.backroom) && data.backroom.length > 0) {
+            data.backroom.forEach(bChair => {
+              html += `
+                <div class="profile-card-item">
+                  <img src="${bChair.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${bChair.name || 'Chair'}" onerror="this.src='logo.jpeg.JPG'">
+                  <div class="profile-name">${bChair.name || 'Chair'}</div>
+                  <div class="profile-role">Backroom Chair</div>
+                  <div class="profile-bio">${bChair.bio || 'Biography pending release.'}</div>
+                </div>`;
+            });
+          } else {
+            html += `<p style="font-size:13.5px; color:var(--text-muted); width: 100%; text-align: center;">Backroom leadership pending.</p>`;
+          }
+          chairsContainer.innerHTML = html;
+
+        } else {
+          chairHeading.innerText = "Chairs";
+          chairsContainer.className = "profiles-grid-container";
+          let html = "";
+          if (data.chairs && Array.isArray(data.chairs) && data.chairs.length > 0) {
+            data.chairs.forEach(chair => {
+              html += `
+                <div class="profile-card-item">
+                  <img src="${chair.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${chair.name || 'Chair'}" onerror="this.src='logo.jpeg.JPG'">
+                  <div class="profile-name">${chair.name || 'Chair'}</div>
+                  <div class="profile-role">Committee Chair</div>
+                  <div class="profile-bio">${chair.bio || 'Biography pending release.'}</div>
+                </div>`;
+            });
+          } else {
+            html += `<p style="font-size:13.5px; color:var(--text-muted); grid-column: 1 / -1; text-align: center;">Leadership announcement pending.</p>`;
+          }
+          chairsContainer.innerHTML = html;
+        }
+
+      } else {
+        topicsText.style.display = "block";
+        stampContainer.style.display = "none";
+        topicsText.innerText = "Agenda details pending...";
+        reportLink.href = "#";
+        chairsContainer.className = "profiles-grid-container";
+        chairsContainer.innerHTML = `<p style="font-size:13.5px; color:var(--text-muted); grid-column: 1 / -1; text-align: center;">Leadership announcement pending.</p>`;
+      }
+    }
+
+    setInterval(function() {
+      if(!appData.targetDate) return;
+      const difference = new Date(appData.targetDate).getTime() - new Date().getTime();
+      
+      if (difference <= 0) {
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+      
+      document.getElementById("days").innerText = String(Math.floor(difference / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById("hours").innerText = String(Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(Math.floor((difference % (1000 * 60)) / 1000)).padStart(2, '0');
+    }, 1000);
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+  </script>
 </body>
 </html>
