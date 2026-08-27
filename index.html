@@ -2,838 +2,524 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
-  <title>FRANMUN 2026 | Official Franciscan School Model United Nations Conference</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FRANMUN 2026 | Global Diplomacy Conference</title>
   
-  <meta name="description" content="Welcome to the official homepage of FRANMUN 2026, the inaugural Model United Nations conference hosted by Franciscan Sister's School, Nazareth. Join elite student diplomats in crafting resolutions for global geopolitical issues." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://franmun.org/" />
-  <meta name="theme-color" content="#0d1117" />
-
+  <meta name="description" content="FRANMUN 2026 - The premier Model United Nations experience hosted by Franciscan Sister's School Nazareth." />
   <link rel="icon" type="image/png" href="7d8c75e2-c20b-4770-aa29-71ab72b07f58-dnscaled.png">
-  <link rel="apple-touch-icon" href="7d8c75e2-c20b-4770-aa29-71ab72b07f58-dnscaled.png" />
-  
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="FRANMUN 2026 | Franciscan School Model United Nations" />
-  <meta property="og:description" content="Engage in advanced diplomatic discourse at the First Annual Franciscan School Model United Nations Conference. Register today as a delegate or chair." />
-  <meta property="og:url" content="https://franmun.org/" />
-  <meta property="og:site_name" content="FRANMUN" />
-  <meta property="og:image" content="logo.jpeg.JPG" />
-  <meta property="og:image:alt" content="FRANMUN Official Insignia Logo" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="FRANMUN 2026 | Franciscan School Model United Nations" />
-  <meta name="twitter:description" content="Engage in advanced diplomatic discourse at the First Annual Franciscan School Model United Nations Conference. Register today as a delegate or chair." />
-  <meta name="twitter:image" content="logo.jpeg.JPG" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "EducationalOrganization",
-        "@id": "https://franmun.org/#organization",
-        "name": "Franciscan Sister's School Nazareth",
-        "url": "https://franmun.org/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://franmun.org/logo.jpeg.JPG",
-          "caption": "Franciscan Sister's School Logo"
-        },
-        "email": "franmun2025@gmail.com",
-        "sameAs": [
-          "https://www.instagram.com/franciscan_munners"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://franmun.org/#website",
-        "url": "https://franmun.org/",
-        "name": "FRANMUN 2026",
-        "description": "First Annual Model United Nations Conference at Franciscan Sister's School Nazareth",
-        "publisher": {
-          "@id": "https://franmun.org/#organization"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://franmun.org/?s={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      }
-    ]
-  }
-  </script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <style>
     :root {
-      --bg-main: #0b0f19;
-      --bg-gradient-start: #111827;
-      --bg-gradient-end: #030712;
+      --bg-base: #030712;
+      --surface: #0f172a;
+      --surface-border: #1e293b;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #06b6d4;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --danger: #ef4444;
       
-      --card-bg: rgba(17, 24, 39, 0.75);
-      --card-hover-bg: rgba(31, 41, 55, 0.85);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Outfit', sans-serif;
       
-      --accent-gold: #fbbf24;
-      --accent-gold-glow: rgba(251, 191, 36, 0.15);
-      --accent-blue: #38bdf8;
-      --accent-blue-hover: #0ea5e9;
-      --accent-red: #f87171;
-      
-      --text-dark: #f3f4f6;
-      --text-muted: #9ca3af;
-      --text-body: #d1d5db;
-      
-      --font-heading: 'Playfair Display', Georgia, serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      
-      --radius-button: 10px;
-      --radius-card: 16px;
-      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
-      --shadow-hover: 0 25px 50px -12px rgba(56, 189, 248, 0.15);
+      --radius: 16px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     
     html {
-      min-height: 100%;
-      background: var(--bg-main);
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: var(--font-body);
-      background: radial-gradient(circle at top center, var(--bg-gradient-start) 0%, var(--bg-main) 60%, var(--bg-gradient-end) 100%);
       min-height: 100vh;
-      color: var(--text-dark);
-      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
+    /* Maintenance Overlays */
+    #maintenanceContent {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Modern Minimalist Header */
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 14px 5%;
+      top: 0; left: 0; width: 100%;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--surface-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      will-change: transform;
+      padding: 1.25rem 5%;
+      z-index: 1000;
     }
 
-    header.nav-hidden {
-      transform: translateY(-100%);
-    }
-
-    .logo-container {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    header img {
-      max-width: 48px;
-      height: auto;
+    .brand img {
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      background: #fff;
-      padding: 2px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
+      object-fit: cover;
     }
 
-    .header-text h1 {
+    .brand span {
       font-family: var(--font-heading);
-      font-size: 15px;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: var(--text-dark);
-      letter-spacing: 0.04em;
+      letter-spacing: -0.02em;
     }
 
-    .header-text p {
-      font-size: 10px;
-      color: var(--accent-gold);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .nav-tabs {
+    .nav-links {
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      gap: 8px;
+      background: var(--surface);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--surface-border);
     }
 
-    .tab-btn {
+    .nav-btn {
       background: transparent;
       border: none;
       color: var(--text-muted);
       font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
       padding: 8px 16px;
-      border-radius: var(--radius-button);
+      border-radius: 8px;
       cursor: pointer;
-      transition: var(--transition-smooth);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      min-height: 38px;
-      touch-action: manipulation;
+      transition: all 0.2s ease;
     }
 
-    .tab-btn:hover {
-      color: var(--text-dark);
-      background: rgba(255, 255, 255, 0.05);
+    .nav-btn:hover {
+      color: var(--text-main);
     }
 
-    .tab-btn.active {
-      color: #0b0f19;
-      background: var(--accent-gold);
-      font-weight: 700;
-      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
-    }
-
-    .main-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 130px 20px 70px 20px;
-      min-height: 85vh;
-    }
-
-    .hero-section { 
-      padding: 40px 0 20px 0;
-      text-align: center;
-    }
-
-    .hero-section h2 {
-      font-family: var(--font-heading);
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.15;
+    .nav-btn.active {
+      background: var(--primary);
       color: #fff;
-      letter-spacing: 0.02em;
-      margin-bottom: 12px;
-      text-shadow: 0 4px 30px rgba(251, 191, 36, 0.15);
+      font-weight: 600;
     }
 
-    .hero-section p {
-      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-      color: var(--accent-gold);
-      font-weight: 700;
-      max-width: 650px;
-      margin: 0 auto;
-      padding: 0 10px;
+    /* Layout Containers */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 90%;
+      margin: 120px auto 80px auto;
     }
 
-    .official-section {
-      margin: 40px 0;
+    .page-view { display: none; }
+    .page-view.active-page { display: block; animation: fadeIn 0.3s ease forwards; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero */
+    .hero {
       text-align: center;
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: var(--radius-card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-premium);
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
+      padding: 3rem 0;
     }
 
-    .official-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue));
-    }
-
-    .official-section h3 {
+    .hero h1 {
       font-family: var(--font-heading);
-      font-size: 18px;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
       font-weight: 700;
-      color: var(--accent-gold);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #fff, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--accent);
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      margin-bottom: 18px;
+      font-size: 0.85rem;
     }
 
-    .official-section p {
-      color: var(--text-body);
-      font-size: 15.5px;
-      line-height: 1.8;
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
-    .divider-line {
-      width: 120px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.4), transparent);
-      margin: 45px auto;
-    }
-
-    .countdown-container {
+    /* Metric Grid (Countdown) */
+    .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      max-width: 580px;
-      margin: 0 auto;
+      max-width: 600px;
+      margin: 3rem auto;
     }
 
-    .countdown-box {
+    .count-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      padding: 20px;
+      border-radius: var(--radius);
       text-align: center;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 22px 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      transition: var(--transition-smooth);
     }
 
-    .countdown-box:hover {
-      transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.06);
-      border-color: var(--accent-gold);
-      box-shadow: 0 12px 25px rgba(251, 191, 36, 0.1);
-    }
-
-    .countdown-number {
-      font-family: var(--font-heading);
-      font-size: 30px;
-      font-weight: 700;
+    .count-card span {
       display: block;
-      color: var(--accent-gold);
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
     }
 
-    .countdown-label {
-      font-size: 10px;
+    .count-card label {
+      font-size: 0.75rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-top: 6px;
-      font-weight: 700;
+      letter-spacing: 0.1em;
     }
 
-    .committee-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
+    /* Notice Box */
+    .notice-box {
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      padding: 24px;
+      border-radius: var(--radius);
+      text-align: center;
+      max-width: 700px;
+      margin: 2rem auto;
+      font-size: 0.95rem;
+      color: var(--text-muted);
     }
 
-    @media (min-width: 640px) {
-      .committee-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    .notice-box strong { color: var(--text-main); }
 
-    @media (min-width: 1024px) {
-      .committee-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .committee-icon {
-      aspect-ratio: 1 / 1; 
-      cursor: pointer;
-      background: var(--card-bg);
-      padding: 30px;
+    /* Action Links & Buttons */
+    .btn-group {
       display: flex;
-      align-items: center;
       justify-content: center;
-      transition: var(--transition-smooth);
-      overflow: hidden;
-      width: 100%;
-      border-radius: var(--radius-card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-premium);
-      touch-action: manipulation;
-    }
-
-    .committee-icon:hover {
-      background: var(--card-hover-bg);
-      transform: translateY(-6px);
-      border-color: var(--accent-gold);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .committee-icon img {
-      max-width: 75%;
-      max-height: 75%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.4));
-    }
-
-    .profiles-grid-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-top: 24px;
-      justify-content: center;
-      justify-items: center;
-    }
-
-    @media (min-width: 768px) {
-      .profiles-grid-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .profiles-grid-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .profiles-grid-container.center-few {
-      display: flex;
+      gap: 16px;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-    }
-    .profiles-grid-container.center-few > .profile-card-item {
-      width: 100%;
-      max-width: 320px;
-    }
-    @media (min-width: 768px) {
-      .profiles-grid-container.center-few > .profile-card-item {
-        width: calc(50% - 12px);
-      }
+      margin: 2rem 0;
     }
 
-    .profile-card-item {
+    .action-btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .action-btn.disabled {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Cards & Grids */
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .content-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 1.5rem;
+    }
+
+    .committee-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .committee-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .committee-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+
+    /* Profile Grid Cards */
+    .profile-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      background: var(--card-bg);
-      padding: 26px;
-      border-radius: var(--radius-card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-premium);
-      transition: var(--transition-smooth);
-      width: 100%;
     }
 
-    .profile-card-item:hover {
-      background: var(--card-hover-bg);
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-      border-color: rgba(251, 191, 36, 0.3);
-    }
-
-    .profile-square-img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      max-width: 190px;
-      border-radius: 12px;
+    .profile-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
       object-fit: cover;
       margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid var(--primary);
     }
 
-    .profile-name {
+    .profile-card h4 {
       font-family: var(--font-heading);
-      font-size: 19px;
-      font-weight: 700;
-      color: #fff;
+      font-size: 1.1rem;
       margin-bottom: 4px;
     }
 
-    .profile-role {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--accent-gold);
+    .profile-card span {
+      font-size: 0.75rem;
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 10px;
-    }
-
-    .profile-bio {
-      color: var(--text-body);
-      font-size: 13.5px;
-      line-height: 1.65;
-      width: 100%;
-      text-align: center;
-    }
-
-    .committee-page-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-
-    .back-btn {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-dark);
-      padding: 10px 18px;
-      border-radius: var(--radius-button);
-      cursor: pointer;
       font-weight: 700;
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      transition: var(--transition-smooth);
-      min-height: 42px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      touch-action: manipulation;
-    }
-
-    .back-btn:hover {
-      background: var(--accent-gold);
-      color: #0b0f19;
-      border-color: var(--accent-gold);
-      box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
-    }
-
-    .parent-notice-section {
-      background: var(--card-bg);
-      border: 1px solid rgba(251, 191, 36, 0.2);
-      border-radius: var(--radius-card);
-      padding: 24px;
-      margin: 35px auto;
-      max-width: 780px;
-      text-align: center;
-      box-shadow: var(--shadow-premium);
-    }
-
-    .parent-notice-text {
-      font-size: 14px;
-      color: var(--text-body);
-      line-height: 1.7;
-    }
-
-    .parent-notice-text strong {
-      color: var(--accent-gold);
-      font-weight: 700;
-    }
-
-    .button-container {
-      margin: 30px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-
-    @media (min-width: 640px) {
-      .button-container {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent-gold);
-      color: #0b0f19;
-      font-weight: 700;
-      padding: 15px 28px;
-      border-radius: var(--radius-button);
-      text-decoration: none;
-      font-size: 12.5px;
       letter-spacing: 0.1em;
-      text-transform: uppercase;
-      width: 100%;
-      max-width: 290px;
-      min-height: 48px;
-      box-shadow: 0 8px 22px rgba(251, 191, 36, 0.25);
-      transition: var(--transition-smooth);
-      text-align: center;
-      border: none;
+      margin-bottom: 12px;
+    }
+
+    .profile-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Committee Detail View */
+    .back-nav {
+      background: transparent;
+      border: 1px solid var(--surface-border);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      touch-action: manipulation;
+      font-weight: 600;
+      margin-bottom: 2rem;
     }
 
-    .button:hover {
-      background: #fcd34d;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(251, 191, 36, 0.4);
-    }
-
-    .modal-secret-stamp {
-      border: 2px dashed var(--accent-red);
-      color: var(--accent-red);
-      padding: 10px 20px;
-      border-radius: 6px;
+    .stamp {
       display: inline-block;
+      border: 2px dashed var(--danger);
+      color: var(--danger);
+      padding: 6px 16px;
       font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: bold;
-      letter-spacing: 2.5px;
-      transform: rotate(-1.5deg);
-      margin: 18px 0;
-      background: rgba(248, 113, 113, 0.05);
+      font-weight: 700;
+      letter-spacing: 2px;
+      transform: rotate(-2deg);
+      margin: 1rem 0;
     }
 
     .spinner {
       width: 32px;
       height: 32px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      border-top-color: var(--accent-gold);
+      border: 3px solid var(--surface-border);
+      border-top-color: var(--primary);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-      margin: 20px auto;
+      margin: 40px auto;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    footer {
+      text-align: center;
+      padding: 3rem;
+      border-top: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
+
+    footer a { color: var(--primary); text-decoration: none; }
 
     @media (max-width: 768px) {
-      header {
-        padding: 12px 16px;
-        flex-direction: column; 
-        gap: 12px;
-      }
-      .logo-container {
-        width: 100%;
-        justify-content: center;
-      }
-      .nav-tabs {
-        width: 100%;
-        justify-content: center;
-        gap: 6px;
-      }
-      .tab-btn {
-        padding: 6px 12px;
-        font-size: 11px;
-      }
-      .countdown-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .main-container {
-        padding-top: 160px;
-      }
+      .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+      header { flex-direction: column; gap: 12px; }
+      .nav-links { width: 100%; justify-content: center; }
     }
-
-    .page-view { display: none; }
-    .page-view.active-page { display: block; }
   </style>
 </head>
 <body>
 
-  <div id="maintenanceContent" style="display:none;">
-    <div style="text-align:center; padding:80px 20px;">
-      <h2 style="font-family: var(--font-heading); margin-bottom: 16px; font-size: 2rem; color: #fff;">System Maintenance</h2>
-      <p style="color: var(--text-muted); margin-bottom: 16px;">The FRANMUN administrative portal is currently undergoing scheduled updates.</p>
-      <a href="https://www.instagram.com/franciscan_munners" target="_blank" rel="noopener" style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">@franciscan_munners</a>
+  <!-- Maintenance Panel Hook -->
+  <div id="maintenanceContent">
+    <div>
+      <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 12px;">Under Maintenance</h2>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">FRANMUN system is undergoing administrative updates.</p>
+      <a href="https://www.instagram.com/franciscan_munners" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">@franciscan_munners</a>
     </div>
   </div>
 
   <div id="delegateContent">
     <header>
-      <div class="logo-container">
-        <img src="logo.jpeg.JPG" alt="Franciscan Sister's School Official Logo">
-        <div class="header-text">
-          <h1>Franciscan School</h1>
-          <p>FRANMUN 2026</p>
-        </div>
+      <div class="brand">
+        <img src="7d8c75e2-c20b-4770-aa29-71ab72b07f58-dnscaled.png" alt="Logo">
+        <span>FRANMUN</span>
       </div>
-
-      <nav class="nav-tabs" id="navTabs">
-        <button class="tab-btn active" id="btn-home" onclick="switchPage('home')">Home</button>
-        <button class="tab-btn" id="btn-committees" onclick="switchPage('committees')">Committees</button>
-        <button class="tab-btn" id="btn-team" onclick="switchPage('team')">Team</button>
-        <button class="tab-btn" id="btn-gallery" onclick="switchPage('gallery')">Gallery</button>
+      <nav class="nav-links">
+        <button class="nav-btn active" id="btn-home" onclick="switchPage('home')">Home</button>
+        <button class="nav-btn" id="btn-committees" onclick="switchPage('committees')">Committees</button>
+        <button class="nav-btn" id="btn-team" onclick="switchPage('team')">Team</button>
+        <button class="nav-btn" id="btn-gallery" onclick="switchPage('gallery')">Archives</button>
       </nav>
     </header>
 
-    <main class="main-container">
-      
+    <main>
       <!-- HOME PAGE -->
       <section id="page-home" class="page-view active-page">
-        <div class="hero-section">
-          <h2>FRANMUN</h2>
-          <p>First Annual Model United Nations Conference</p>
+        <div class="hero">
+          <h1>FRANMUN 2026</h1>
+          <p>Model United Nations Conference</p>
         </div>
 
-        <div class="official-section">
-          <h3>Conference Countdown</h3>
-          <div class="countdown-container">
-            <div class="countdown-box"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
-            <div class="countdown-box"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hours</span></div>
-            <div class="countdown-box"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
-            <div class="countdown-box"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
+        <div class="content-card" style="text-align: center;">
+          <h3 style="margin-bottom: 1.5rem;">Countdown to Assembly</h3>
+          <div class="countdown-grid">
+            <div class="count-card"><span id="days">00</span><label>Days</label></div>
+            <div class="count-card"><span id="hours">00</span><label>Hours</label></div>
+            <div class="count-card"><span id="minutes">00</span><label>Mins</label></div>
+            <div class="count-card"><span id="seconds">00</span><label>Secs</label></div>
           </div>
         </div>
 
-        <div class="parent-notice-section">
-          <div class="parent-notice-text">
-            <strong>Official Registration Notice:</strong> Parents or legal guardians must review and sign the required participation documentation. The guardian's name serves as official digital authorization.
-          </div>
+        <div class="notice-box">
+          <strong>Guardian Notice:</strong> Participation requires formal guardian documentation authorization prior to commencement.
         </div>
 
-        <div class="button-container" id="liveRegButtons"></div>
+        <div class="btn-group" id="liveRegButtons"></div>
 
-        <div class="divider-line"></div>
-
-        <div class="official-section">
-          <h3>About Our Conference</h3>
-          <p>Welcome to Franciscan Sister's School's inaugural Model United Nations conference. Join us for a premier academic event where student delegates engage in rigorous diplomatic discourse, analyze complex geopolitical issues, and draft high-impact resolutions.</p>
+        <div class="content-card" style="text-align: center; margin-top: 3rem;">
+          <h3>About The Initiative</h3>
+          <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.7;">
+            Welcome to the inaugural Franciscan Sister's School Model United Nations conference. A dedicated environment designed to cultivate dynamic problem solvers, international collaboration, and high-impact resolutions.
+          </p>
         </div>
       </section>
 
-      <!-- COMMITTEES LIST PAGE -->
+      <!-- COMMITTEES PAGE -->
       <section id="page-committees" class="page-view">
-        <div class="official-section" style="margin-top: 0;">
+        <div class="content-card">
           <h3>Conference Committees</h3>
-          <p style="margin-bottom: 28px;">Select a committee below to review official agendas, study guides, and chair profiles.</p>
-          <div class="committee-grid">
-            <div class="committee-icon" onclick="openCommitteePage('UNICEF')"><img src="unicef.png" alt="UNICEF" /></div>
-            <div class="committee-icon" onclick="openCommitteePage('UNWOMEN')"><img src="unwomen.png" alt="UN Women" /></div>
-            <div class="committee-icon" onclick="openCommitteePage('UNHRC')"><img src="unhrc.png" alt="UNHRC" /></div>
-            <div class="committee-icon" onclick="openCommitteePage('DISEC')"><img src="disec.png" alt="DISEC" /></div>
-            <div class="committee-icon" onclick="openCommitteePage('WHO')"><img src="who.png" alt="WHO" id="whoImage" onerror="this.src='who.png'" /></div>
-            <div class="committee-icon" onclick="openCommitteePage('UNHSC')"><img src="unhsc.png" alt="UNHSC" /></div>
-            <div class="committee-icon" onclick="openCommitteePage('CRISIS')"><img src="crisis.png" alt="CRISIS" /></div>
+          <p style="color: var(--text-muted); margin-bottom: 1rem;">Select an active assembly platform to access research briefs and leadership matrices.</p>
+          <div class="grid-layout">
+            <div class="committee-item" onclick="openCommitteePage('UNICEF')"><img src="unicef.png" alt="UNICEF"><h4>UNICEF</h4></div>
+            <div class="committee-item" onclick="openCommitteePage('UNWOMEN')"><img src="unwomen.png" alt="UN Women"><h4>UN WOMEN</h4></div>
+            <div class="committee-item" onclick="openCommitteePage('UNHRC')"><img src="unhrc.png" alt="UNHRC"><h4>UNHRC</h4></div>
+            <div class="committee-item" onclick="openCommitteePage('DISEC')"><img src="disec.png" alt="DISEC"><h4>DISEC</h4></div>
+            <div class="committee-item" onclick="openCommitteePage('WHO')"><img src="who.png" alt="WHO"><h4>WHO</h4></div>
+            <div class="committee-item" onclick="openCommitteePage('UNHSC')"><img src="unhsc.png" alt="UNHSC"><h4>UNHSC</h4></div>
+            <div class="committee-item" onclick="openCommitteePage('CRISIS')"><img src="crisis.png" alt="CRISIS"><h4>CRISIS</h4></div>
           </div>
         </div>
       </section>
 
-      <!-- INDIVIDUAL COMMITTEE SUB-PAGE -->
+      <!-- COMMITTEE DETAIL -->
       <section id="page-committee-detail" class="page-view">
-        <div class="committee-page-header">
-          <button class="back-btn" onclick="switchPage('committees')">&larr; Return to Committees</button>
-        </div>
-
-        <div class="official-section" style="text-align: center; margin-bottom: 24px;">
-          <h2 id="detailCommitteeTitle" style="font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: #fff; letter-spacing: 0.05em; margin-bottom: 20px;">Committee Name</h2>
+        <button class="back-nav" onclick="switchPage('committees')">&larr; Back to Committees</button>
+        <div class="content-card" style="text-align: center;">
+          <h2 id="detailCommitteeTitle" style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 1.5rem;">Committee</h2>
+          <p id="detailTopicsText" style="color: var(--text-muted); font-size: 1.05rem; white-space: pre-line; max-width: 800px; margin: 0 auto;"></p>
           
-          <div style="font-size: 12px; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;">Research Report &amp; Topics</div>
-          
-          <div style="padding: 10px 0;">
-            <p id="detailTopicsText" style="color: var(--text-dark); font-size: 15.5px; font-weight: 600; line-height: 1.7; white-space: pre-line; max-width: 800px; margin: 0 auto;"></p>
+          <div id="detailComingSoonStamp" style="display: none;">
+            <div class="stamp">RESTRICTED ACCESS</div>
           </div>
 
-          <div id="detailComingSoonStamp" style="display: none; text-align: center; padding: 20px 0;">
-            <div class="modal-secret-stamp">RESTRICTED</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Committee agendas and confidential briefs are pending release.</p>
-          </div>
-
-          <div style="margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px;">
-            <a id="detailReportLink" href="#" target="_blank" class="button" style="max-width: 290px;" rel="noopener">Access Full Research Report &rarr;</a>
-            <div id="countryMatrixDetailContainer" style="width: 100%; display: flex; justify-content: center;"></div>
+          <div class="btn-group" style="margin-top: 2rem;">
+            <a id="detailReportLink" href="#" target="_blank" class="action-btn">Research Report &rarr;</a>
+            <div id="countryMatrixDetailContainer"></div>
           </div>
         </div>
 
-        <div class="divider-line"></div>
-
-        <div class="official-section">
-          <h3 id="chairSectionHeading">Chairs</h3>
-          <div class="profiles-grid-container" id="detailChairsContainer">
-          </div>
+        <div class="content-card" style="margin-top: 2rem;">
+          <h3 id="chairSectionHeading" style="text-align: center; margin-bottom: 2rem;">Leadership</h3>
+          <div class="grid-layout" id="detailChairsContainer"></div>
         </div>
       </section>
 
-      <!-- DEDICATED TEAM PAGE -->
+      <!-- TEAM PAGE -->
       <section id="page-team" class="page-view">
-        <div class="hero-section" style="padding-top: 10px;">
-          <h2>Secretariat Team</h2>
-          <p>Executive Leadership of FRANMUN 2026</p>
+        <div class="hero" style="padding-top: 0;">
+          <h1>Secretariat</h1>
+          <p>Executive Administration</p>
         </div>
-        <div id="teamPageContainer" class="profiles-grid-container" style="margin-top: 30px;">
+        <div class="grid-layout" id="teamPageContainer" style="margin-top: 2rem;">
           <div style="grid-column: 1 / -1;"><div class="spinner"></div></div>
         </div>
       </section>
 
-      <!-- GALLERY PAGE -->
+      <!-- GALLERY / ARCHIVES -->
       <section id="page-gallery" class="page-view">
-        <div class="official-section" id="galleryCardContent" style="padding: 40px 24px;">
+        <div class="content-card" id="galleryCardContent" style="text-align: center;">
           <div class="spinner"></div>
         </div>
       </section>
-      
     </main>
+
+    <footer>
+      <p>Inquiries: <a href="mailto:franmun2025@gmail.com">franmun2025@gmail.com</a></p>
+      <p style="margin-top: 8px;">Franciscan Sister's School Nazareth &copy; 2026</p>
+    </footer>
   </div>
 
-  <footer style="
-    text-align: center; 
-    padding: 40px 20px; 
-    margin-top: 60px; 
-    border-top: 1px solid rgba(255, 255, 255, 0.08); 
-    background: rgba(11, 15, 25, 0.95);
-    backdrop-filter: blur(12px);
-  ">
-    <p style="font-size: 13.5px; color: var(--text-body); margin: 0 0 6px 0;">
-      Official Inquiry: <a href="mailto:franmun2025@gmail.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">franmun2025@gmail.com</a>
-    </p>
-    <p style="font-size: 13.5px; color: #fff; font-weight: 700; margin: 0 0 12px 0;">
-      Franciscan Sister's School Nazareth
-    </p>
-    <p style="font-size: 11.5px; color: var(--text-muted); opacity: 0.9; margin: 0;">
-      &copy; 2026 Franciscan Sister's School MUN. All rights reserved.
-    </p>
-  </footer>
-
+  <!-- Real-Time Data Hook Integration -->
   <script>
-    let lastScrollY = window.scrollY;
-    let lastKnownScrollY = window.scrollY;
-    let ticking = false;
-    const globalHeader = document.querySelector('header');
-
-    window.addEventListener('scroll', () => {
-      lastScrollY = window.scrollY;
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollDelta = lastScrollY - lastKnownScrollY;
-          if (Math.abs(scrollDelta) > 15) {
-            if (lastScrollY > 120 && scrollDelta > 0) {
-              globalHeader.classList.add('nav-hidden');
-            } else if (scrollDelta < 0) {
-              globalHeader.classList.remove('nav-hidden');
-            }
-            lastKnownScrollY = lastScrollY;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
     function switchPage(pageId) {
       document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      
-      const targetPage = document.getElementById('page-' + pageId);
-      if (targetPage) targetPage.classList.add('active-page');
-      
-      const btn = document.getElementById('btn-' + pageId);
-      if (btn) btn.classList.add('active');
-      
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('page-' + pageId).classList.add('active-page');
+      document.getElementById('btn-' + pageId).classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -856,15 +542,14 @@
       if (snapshot.exists()) {
         appData = snapshot.val() || {};
         
-        const maintenanceOverlay = document.getElementById("maintenanceContent");
+        const maintenance = document.getElementById("maintenanceContent");
         if (appData.maintenanceMode) {
-          maintenanceOverlay.style.display = "block";
+          maintenance.style.display = "flex";
           document.getElementById("delegateContent").style.display = "none";
-          return; 
-        } else {
-          maintenanceOverlay.style.display = "none";
-          document.getElementById("delegateContent").style.display = "block";
+          return;
         }
+        maintenance.style.display = "none";
+        document.getElementById("delegateContent").style.display = "block";
         
         renderRegistrationButtons();
         renderTeamPage();
@@ -872,24 +557,38 @@
       }
     });
 
+    function renderRegistrationButtons() {
+      const container = document.getElementById("liveRegButtons");
+      if(!container) return;
+      let html = "";
+      if (appData.delegatesOpen) {
+        html += `<a href="https://docs.google.com/forms/d/1sOFqQOVIdU6Z--wURon5p6E5cgn-sLTFOjrpWvCkZqk/viewform?edit_requested=true" target="_blank" class="action-btn">Delegate Registration</a>`;
+      } else {
+        html += `<a href="#" class="action-btn disabled">Delegate Registration Closed</a>`;
+      }
+      if (appData.chairsOpen) {
+        html += `<a href="https://docs.google.com/forms/d/e/1FAIpQLSf0NSNzbcxGG2MXZtzw4hbb-BkSPUjqtC8l7lJwOYDv9fg/viewform" target="_blank" class="action-btn">Chair Registration</a>`;
+      } else {
+        html += `<a href="#" class="action-btn disabled">Chair Registration Closed</a>`;
+      }
+      container.innerHTML = html;
+    }
+
     function renderTeamPage() {
       const container = document.getElementById("teamPageContainer");
       if (!container) return;
-
-      container.className = "profiles-grid-container";
       if (!appData.sgTeam || !Array.isArray(appData.sgTeam) || appData.sgTeam.length === 0) {
-        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center;"><p style="color: var(--text-muted);">Secretariat members pending announcement.</p></div>`;
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">Team announcements pending.</p>`;
         return;
       }
-
       let html = "";
-      appData.sgTeam.forEach((member) => {
+      appData.sgTeam.forEach(m => {
         html += `
-          <div class="profile-card-item">
-            <img src="${member.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${member.name || 'Team Member'}" onerror="this.src='logo.jpeg.JPG'">
-            <div class="profile-name">${member.name || ''}</div>
-            <div class="profile-role">${member.role || 'Secretariat General'}</div>
-            <div class="profile-bio">${member.bio || 'Biography pending release.'}</div>
+          <div class="profile-card">
+            <img src="${m.img || 'logo.jpeg.JPG'}" alt="Member" onerror="this.src='logo.jpeg.JPG'">
+            <h4>${m.name || ''}</h4>
+            <span>${m.role || 'Secretariat General'}</span>
+            <p>${m.bio || 'Biography upcoming.'}</p>
           </div>`;
       });
       container.innerHTML = html;
@@ -898,172 +597,92 @@
     function renderGallerySection() {
       const container = document.getElementById("galleryCardContent");
       if (!container) return;
-
       if (appData.galleryLocked) {
-        container.innerHTML = `
-          <h3>Conference Gallery Restricted</h3>
-          <p style="color: var(--text-muted); max-width: 500px; margin: 16px auto 0 auto;">
-            Official photographic archives and media streams will be published following conference proceedings.
-          </p>`;
+        container.innerHTML = `<h3>Archives Locked</h3><p style="color:var(--text-muted); margin-top:10px;">Media streams will open following conference operations.</p>`;
       } else {
-        let filesHtml = `<h3>Official Conference Archives</h3>
-                         <p style="color: var(--text-muted); margin-bottom: 24px;">Access official documentation and photographic drives below:</p>
-                         <div style="display: flex; flex-direction: column; gap: 14px; max-width: 320px; margin: 0 auto; width: 100%;">`;
-        
-        if (appData.driveFiles && Array.isArray(appData.driveFiles) && appData.driveFiles.length > 0) {
-          appData.driveFiles.forEach(fileObj => {
-            filesHtml += `<a href="${fileObj.link || '#'}" target="_blank" rel="noopener noreferrer" class="button" style="max-width: 100%;">${fileObj.title || 'View Archive Document'} &rarr;</a>`;
+        let h = `<h3>Official Files</h3><p style="color:var(--text-muted); margin-bottom:20px;">Access published drives and records:</p>`;
+        if (appData.driveFiles && appData.driveFiles.length > 0) {
+          appData.driveFiles.forEach(f => {
+            h += `<a href="${f.link || '#'}" target="_blank" class="action-btn" style="display:inline-block; margin:6px;">${f.title || 'Document'}</a>`;
           });
         } else {
-          filesHtml += `<p style="color: var(--text-muted); font-size: 13.5px;">No files published yet.</p>`;
+          h += `<p style="color:var(--text-muted);">No records published yet.</p>`;
         }
-        filesHtml += `</div>`;
-        container.innerHTML = filesHtml;
+        container.innerHTML = h;
       }
     }
 
-    function renderRegistrationButtons() {
-      const container = document.getElementById("liveRegButtons");
-      if(!container) return;
-      let html = "";
-      if (appData.delegatesOpen) {
-        html += `<a href="https://docs.google.com/forms/d/1sOFqQOVIdU6Z--wURon5p6E5cgn-sLTFOjrpWvCkZqk/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" class="button">Delegate Registration &rarr;</a>`;
-      } else {
-        html += `<a href="#" class="button" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text-muted); cursor:not-allowed;" onclick="event.preventDefault();">Delegate Registration Closed</a>`;
-      }
-      if (appData.chairsOpen) {
-        html += `<a href="https://docs.google.com/forms/d/e/1FAIpQLSf0NSNzbcxGG2MXZtzw4hbb-BkSPUjqtC8l7lJwOYDv9fg/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="button">Chair Registration &rarr;</a>`;
-      } else {
-        html += `<a href="#" class="button" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text-muted); cursor:not-allowed;" onclick="event.preventDefault();">Chair Registration Closed</a>`;
-      }
-      container.innerHTML = html;
-    }
-
-    function openCommitteePage(committeeName) {
-      document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
-      document.getElementById('page-committee-detail').classList.add('active-page');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      document.getElementById("detailCommitteeTitle").innerText = committeeName;
-
-      const topicsText = document.getElementById("detailTopicsText");
-      const stampContainer = document.getElementById("detailComingSoonStamp");
-      const reportLink = document.getElementById("detailReportLink");
-      const matrixDetailContainer = document.getElementById("countryMatrixDetailContainer");
+    function openCommitteePage(cName) {
+      switchPage('committee-detail');
+      document.getElementById("detailCommitteeTitle").innerText = cName;
+      const topics = document.getElementById("detailTopicsText");
+      const stamp = document.getElementById("detailComingSoonStamp");
+      const report = document.getElementById("detailReportLink");
+      const matrixDiv = document.getElementById("countryMatrixDetailContainer");
       const chairsContainer = document.getElementById("detailChairsContainer");
-      const chairHeading = document.getElementById("chairSectionHeading");
 
-      chairsContainer.innerHTML = `<div style="grid-column: 1 / -1;"><div class="spinner"></div></div>`;
+      chairsContainer.innerHTML = `<div style="grid-column: 1/-1;"><div class="spinner"></div></div>`;
 
       const matrixUrl = appData.countryMatrixPdf || "";
-      const isMatrixLocked = !!appData.countryMatrixLocked;
-      if (!isMatrixLocked && matrixUrl !== "") {
-        matrixDetailContainer.innerHTML = `<a href="${matrixUrl}" target="_blank" rel="noopener noreferrer" class="button" style="max-width: 290px;">Country Matrix &rarr;</a>`;
+      if (!appData.countryMatrixLocked && matrixUrl !== "") {
+        matrixDiv.innerHTML = `<a href="${matrixUrl}" target="_blank" class="action-btn" style="background:var(--surface); border:1px solid var(--surface-border);">Country Matrix</a>`;
       } else {
-        matrixDetailContainer.innerHTML = `<a href="#" class="button" style="max-width: 290px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); cursor: not-allowed;" onclick="event.preventDefault();">Country Matrix Pending</a>`;
+        matrixDiv.innerHTML = `<button class="action-btn disabled">Matrix Pending</button>`;
       }
 
-      if (appData && appData.committees && appData.committees[committeeName]) {
-        const data = appData.committees[committeeName];
-        reportLink.href = data.report || "#";
-
-        if (appData.committeesComingSoon === true) {
-          topicsText.style.display = "none";
-          stampContainer.style.display = "block";
-          chairsContainer.className = "profiles-grid-container";
+      if (appData.committees && appData.committees[cName]) {
+        const data = appData.committees[cName];
+        report.href = data.report || "#";
+        if (appData.committeesComingSoon) {
+          topics.style.display = "none";
+          stamp.style.display = "block";
           chairsContainer.innerHTML = "";
           return;
         }
+        topics.style.display = "block";
+        stamp.style.display = "none";
+        topics.innerText = data.topics || "Details pending...";
 
-        topicsText.style.display = "block";
-        stampContainer.style.display = "none";
-        topicsText.innerText = data.topics || "Agenda details pending...";
-
-        if (committeeName === "CRISIS") {
-          chairHeading.innerText = "Chairs";
-          chairsContainer.className = "profiles-grid-container center-few";
-          let html = "";
-          
-          html += `<div style="grid-column: 1 / -1; width: 100%; font-family: var(--font-heading); font-weight: 700; color: var(--accent-gold); text-transform: uppercase; font-size: 16px; letter-spacing: 0.15em; margin-bottom: 8px; text-align: center;">Front Room Chair</div>`;
-          if (data.chairs && Array.isArray(data.chairs) && data.chairs.length > 0) {
-            data.chairs.forEach(chair => {
-              html += `
-                <div class="profile-card-item">
-                  <img src="${chair.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${chair.name || 'Chair'}" onerror="this.src='logo.jpeg.JPG'">
-                  <div class="profile-name">${chair.name || 'Chair'}</div>
-                  <div class="profile-role">Front Room Chair</div>
-                  <div class="profile-bio">${chair.bio || 'Biography pending release.'}</div>
-                </div>`;
+        let cHtml = "";
+        if (cName === "CRISIS") {
+          cHtml += `<div style="grid-column:1/-1; text-align:center; color:var(--accent); font-weight:700; margin-bottom:10px;">Front Room</div>`;
+          if (data.chairs) {
+            data.chairs.forEach(ch => {
+              cHtml += `<div class="profile-card"><img src="${ch.img || 'logo.jpeg.JPG'}" onerror="this.src='logo.jpeg.JPG'"><h4>${ch.name}</h4><span>Chair</span><p>${ch.bio}</p></div>`;
             });
-          } else {
-            html += `<p style="font-size:13.5px; color:var(--text-muted); width: 100%; text-align: center;">Front room leadership pending.</p>`;
           }
-
-          html += `<div style="grid-column: 1 / -1; width: 100%; font-family: var(--font-heading); font-weight: 700; color: var(--accent-gold); text-transform: uppercase; font-size: 16px; letter-spacing: 0.15em; margin-top: 30px; margin-bottom: 8px; text-align: center;">Backroom Chairs</div>`;
-          if (data.backroom && Array.isArray(data.backroom) && data.backroom.length > 0) {
-            data.backroom.forEach(bChair => {
-              html += `
-                <div class="profile-card-item">
-                  <img src="${bChair.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${bChair.name || 'Chair'}" onerror="this.src='logo.jpeg.JPG'">
-                  <div class="profile-name">${bChair.name || 'Chair'}</div>
-                  <div class="profile-role">Backroom Chair</div>
-                  <div class="profile-bio">${bChair.bio || 'Biography pending release.'}</div>
-                </div>`;
+          cHtml += `<div style="grid-column:1/-1; text-align:center; color:var(--accent); font-weight:700; margin-top:20px; margin-bottom:10px;">Backroom</div>`;
+          if (data.backroom) {
+            data.backroom.forEach(b => {
+              cHtml += `<div class="profile-card"><img src="${b.img || 'logo.jpeg.JPG'}" onerror="this.src='logo.jpeg.JPG'"><h4>${b.name}</h4><span>Backroom Chair</span><p>${b.bio}</p></div>`;
             });
-          } else {
-            html += `<p style="font-size:13.5px; color:var(--text-muted); width: 100%; text-align: center;">Backroom leadership pending.</p>`;
           }
-          chairsContainer.innerHTML = html;
-
         } else {
-          chairHeading.innerText = "Chairs";
-          chairsContainer.className = "profiles-grid-container";
-          let html = "";
-          if (data.chairs && Array.isArray(data.chairs) && data.chairs.length > 0) {
-            data.chairs.forEach(chair => {
-              html += `
-                <div class="profile-card-item">
-                  <img src="${chair.img || 'logo.jpeg.JPG'}" class="profile-square-img" alt="${chair.name || 'Chair'}" onerror="this.src='logo.jpeg.JPG'">
-                  <div class="profile-name">${chair.name || 'Chair'}</div>
-                  <div class="profile-role">Committee Chair</div>
-                  <div class="profile-bio">${chair.bio || 'Biography pending release.'}</div>
-                </div>`;
+          if (data.chairs && data.chairs.length > 0) {
+            data.chairs.forEach(ch => {
+              cHtml += `<div class="profile-card"><img src="${ch.img || 'logo.jpeg.JPG'}" onerror="this.src='logo.jpeg.JPG'"><h4>${ch.name}</h4><span>Chair</span><p>${ch.bio}</p></div>`;
             });
           } else {
-            html += `<p style="font-size:13.5px; color:var(--text-muted); grid-column: 1 / -1; text-align: center;">Leadership announcement pending.</p>`;
+            cHtml += `<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">Leadership assignments pending.</p>`;
           }
-          chairsContainer.innerHTML = html;
         }
-
+        chairsContainer.innerHTML = cHtml;
       } else {
-        topicsText.style.display = "block";
-        stampContainer.style.display = "none";
-        topicsText.innerText = "Agenda details pending...";
-        reportLink.href = "#";
-        chairsContainer.className = "profiles-grid-container";
-        chairsContainer.innerHTML = `<p style="font-size:13.5px; color:var(--text-muted); grid-column: 1 / -1; text-align: center;">Leadership announcement pending.</p>`;
+        topics.innerText = "Details pending...";
+        report.href = "#";
+        chairsContainer.innerHTML = `<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">Leadership assignments pending.</p>`;
       }
     }
 
-    setInterval(function() {
-      if(!appData.targetDate) return;
-      const difference = new Date(appData.targetDate).getTime() - new Date().getTime();
-      
-      if (difference <= 0) {
-        document.getElementById("days").innerText = "00";
-        document.getElementById("hours").innerText = "00";
-        document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00";
-        return;
-      }
-      
-      document.getElementById("days").innerText = String(Math.floor(difference / (1000 * 60 * 60 * 24))).padStart(2, '0');
-      document.getElementById("hours").innerText = String(Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      document.getElementById("minutes").innerText = String(Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      document.getElementById("seconds").innerText = String(Math.floor((difference % (1000 * 60)) / 1000)).padStart(2, '0');
+    setInterval(() => {
+      if (!appData.targetDate) return;
+      const diff = new Date(appData.targetDate).getTime() - new Date().getTime();
+      if (diff <= 0) return;
+      document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById("hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
-
-    document.addEventListener('contextmenu', e => e.preventDefault());
   </script>
 </body>
 </html>
